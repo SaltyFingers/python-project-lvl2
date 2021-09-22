@@ -1,16 +1,5 @@
 import json
 
-import pytest
-
-@pytest.fixture
-def file_path1():
-    return '/home/soleny/python-project-lvl2/gendiff/file1.json'
-
-
-@pytest.fixture
-def file_path2():
-    return '/home/soleny/python-project-lvl2/gendiff/file2.json'
-
 
 def generate_diff(file_path1, file_path2):
     first_file = json.load(open(file_path1))
