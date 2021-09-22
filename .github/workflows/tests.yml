@@ -1,4 +1,4 @@
-name: Python CI (lint)
+name: Python CI (tests)
 
 on:
   - push
@@ -22,6 +22,6 @@ jobs:
         run: |
           pip install poetry
           make install
-      - name: Run linter
+      - name: Run pytest
         run: |
-          make lint
+          make pytest
