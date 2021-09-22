@@ -2,14 +2,14 @@ import json
 
 import pytest
 
-# @pytest.fixture
-# def file_path1():
-#     return '/home/soleny/python-project-lvl2/gendiff/file1.json'
+@pytest.fixture
+def file_path1():
+    return '/home/soleny/python-project-lvl2/gendiff/file1.json'
 
 
-# @pytest.fixture
-# def file_path2():
-#     return '/home/soleny/python-project-lvl2/gendiff/file2.json'
+@pytest.fixture
+def file_path2():
+    return '/home/soleny/python-project-lvl2/gendiff/file2.json'
 
 
 def generate_diff(file_path1, file_path2):
@@ -32,11 +32,3 @@ def generate_diff(file_path1, file_path2):
     sorted_differense = sorted(differense, key = lambda x: x[4])
     result = '{\n' + '\n'.join(sorted_differense) + '\n}'
     return result
-
-    
-    
-
- 
-    
-
-
