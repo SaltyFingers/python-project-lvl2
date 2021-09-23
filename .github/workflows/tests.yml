@@ -37,6 +37,7 @@ jobs:
       with:
         python-version: 3.8.5
     - run: |
+          pip install poetry
           pip install pytest
           pip install pytest-cov
           make install
