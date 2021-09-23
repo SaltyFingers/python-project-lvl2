@@ -37,7 +37,8 @@ jobs:
       with:
         python-version: 3.8.5
     - run: |
-          pip install poetry
+          pip install pytest
+          pip install pytest-cov
           make install
     - uses: paambaati/codeclimate-action@v2.7.5
       env:
