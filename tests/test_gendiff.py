@@ -4,12 +4,12 @@ from gendiff.gendiff import generate_diff
 
 @pytest.fixture
 def file_path1():
-    return '/home/soleny/python-project-lvl2/tests/fixtures/file1.json'
+    return 'tests/fixtures/file1.json'
 
 
 @pytest.fixture
 def file_path2():
-    return '/home/soleny/python-project-lvl2/tests/fixtures/file2.json'
+    return 'tests/fixtures/file2.json'
 
 def test_json(file_path1, file_path2):
     exceptation = """{
