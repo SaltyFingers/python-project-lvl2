@@ -26,10 +26,8 @@ jobs:
         run: |
           make lint
           make pytest
-    coverage:
-      name: coverage
-      runs-on: ubuntu-latest
-      steps:
+        name: coverage
+        steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v2
         with:
