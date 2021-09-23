@@ -11,7 +11,7 @@ def file_path1():
 def file_path2():
     return '/home/soleny/python-project-lvl2/tests/fixtures/file2.json'
 
-def test_json():
+def test_json(file_path1, file_path2):
     exceptation = """{
   - follow: false
     host: hexlet.io

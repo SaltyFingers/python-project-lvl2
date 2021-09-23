@@ -18,3 +18,6 @@ lint:
 
 pytest:
 	poetry run pytest
+	
+pytest-cov:
+	python3 -m pytest --cov=gendiff tests/
