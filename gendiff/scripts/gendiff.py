@@ -1,6 +1,6 @@
 import argparse
 import pathlib
-from gendiff.gendiff import generate_diff
+from gendiff.generate_difference import generate_diff
 
 
 def main():
