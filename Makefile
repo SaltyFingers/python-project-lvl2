@@ -19,5 +19,5 @@ lint:
 pytest:
 	poetry run pytest
 	
-pytest-cov:
+test-coverage:
 	python3 -m pytest --cov=gendiff tests/
