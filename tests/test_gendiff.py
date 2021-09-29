@@ -50,12 +50,12 @@ def test_plain_yaml(plain_yaml_file_path1, plain_yaml_file_path2):
 
 @pytest.fixture
 def stylish_json_file_path1():
-    return
+    return 'tests/fixtures/file1_2.json'
 
 
 @pytest.fixture
 def stylish_json_file_path2():
-    return
+    return 'tests/fixtures/file2_2.json'
 
 
 def test_stylish_json(stylish_json_file_path1,
@@ -110,12 +110,12 @@ def test_stylish_json(stylish_json_file_path1,
 
 @pytest.fixture
 def stylish_yaml_file_path1():
-    return
+    return 'tests/fixtures/file1_2.yaml'
 
 
 @pytest.fixture
 def stylish_yaml_file_path2():
-    return
+    return 'tests/fixtures/file2_2.yaml'
 
 
 def test_stylish_yaml(stylish_yaml_file_path1,
