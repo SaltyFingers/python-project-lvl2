@@ -2,7 +2,8 @@ import json
 import pathlib
 
 import yaml
-from gendiff.search_difference import search_difference
+from gendiff.search_difference import search_difference, is_dictionary
+from gendiff.format_difference import format
 
 
 def load_file_by_format(file_path):
@@ -13,14 +14,11 @@ def load_file_by_format(file_path):
         file = yaml.safe_load(open(file_path))
     return file
 
-def print_difference(difference):
-    return difference
-
 
 def generate_diff(file_path1, file_path2):
     first_file, second_file = (load_file_by_format(file_path1), 
                                load_file_by_format(file_path2))
     difference = search_difference(first_file, second_file)
-    return print_difference(difference)
+    return format(difference)
 
 
