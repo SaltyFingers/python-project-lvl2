@@ -1,5 +1,5 @@
 from gendiff.search_difference import is_dictionary, decode_value
-    
+
 
 def format(diff):
 
@@ -11,29 +11,29 @@ def format(diff):
         indent = " " * depth
         difference = ['{']
         depth += 4
+
         for key in keys:
             if diff[key]['condition'] == 'deleted':
-                obj = (f'{indent}  - {key}: \
-{inner(diff[key]["value"], depth)}')
+                obj = (f'{indent}  - {key}: '
+                       f'{inner(diff[key]["value"], depth)}')
 
             elif diff[key]['condition'] == 'added':
-                obj = (f'{indent}  + {key}: \
-{inner(diff[key]["value"], depth)}')
+                obj = (f'{indent}  + {key}: '
+                       f'{inner(diff[key]["value"], depth)}')
 
             elif diff[key]['condition'] == 'equal':
-                obj = (f'{indent}    {key}: \
-{inner(diff[key]["value"], depth)}')
+                obj = (f'{indent}    {key}: '
+                       f'{inner(diff[key]["value"], depth)}')
 
             elif diff[key]['condition'] == 'replaced':
-                obj = (
-                f'{indent}  - {key}: \
-{inner(diff[key]["value1"], depth)}\n'
-                f'{indent}  + {key}: \
-{inner(diff[key]["value2"], depth)}')
+                obj = (f'{indent}  - {key}: '
+                       f'{inner(diff[key]["value1"], depth)}\n'
+                       f'{indent}  + {key}: '
+                       f'{inner(diff[key]["value2"], depth)}')
 
             elif diff[key]['children']:
-                obj = (f'{indent}    {key}: \
-{inner(diff[key]["children"], depth)}')
+                obj = (f'{indent}    {key}: '
+                       f'{inner(diff[key]["children"], depth)}')
 
             difference.append(obj)
         difference.append(f'{indent}}}')
