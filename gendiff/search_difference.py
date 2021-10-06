@@ -18,7 +18,7 @@ def get_keys(dict1, dict2):
     return set(first_keys + second_keys)
 
 
-def add_key(key, dict1, dict2, difference):
+def add_object(key, dict1, dict2, difference):
     if key in dict1 and key not in dict2:
         difference[key] = {
             'condition': 'deleted',
@@ -70,6 +70,6 @@ def search_difference(dict1, dict2=None):
     difference = {}
 
     for key in keys:
-        add_key(key, dict1, dict2, difference)
+        add_object(key, dict1, dict2, difference)
 
     return difference

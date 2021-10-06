@@ -8,4 +8,6 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bc4768616c2143e6fa4a/test_coverage)](https://codeclimate.com/github/SaltyFingers/python-project-lvl2/test_coverage)
 
-https://asciinema.org/a/ybzZ6aQtEg90Y0lxcEPUjRId2
+[![asciicast](https://asciinema.org/a/ybzZ6aQtEg90Y0lxcEPUjRId2.svg)](https://asciinema.org/a/ybzZ6aQtEg90Y0lxcEPUjRId2)
+
+[![asciicast](https://asciinema.org/a/JM913EloUWzhUi4udFoZIOHTj.svg)](https://asciinema.org/a/JM913EloUWzhUi4udFoZIOHTj)

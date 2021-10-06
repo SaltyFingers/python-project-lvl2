@@ -13,7 +13,7 @@ def plain_json_file_path2():
 
 
 def test_plain_json(plain_json_file_path1, plain_json_file_path2):
-    exceptation = """{
+    expectation = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -22,7 +22,7 @@ def test_plain_json(plain_json_file_path1, plain_json_file_path2):
   + verbose: true
 }"""
     assert generate_diff(plain_json_file_path1,
-                         plain_json_file_path2) == exceptation
+                         plain_json_file_path2, 'stylish') == expectation
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def plain_yaml_file_path2():
 
 
 def test_plain_yaml(plain_yaml_file_path1, plain_yaml_file_path2):
-    exceptation = """{
+    expectation = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -45,7 +45,7 @@ def test_plain_yaml(plain_yaml_file_path1, plain_yaml_file_path2):
   + verbose: true
 }"""
     assert generate_diff(plain_yaml_file_path1,
-                         plain_yaml_file_path2) == exceptation
+                         plain_yaml_file_path2, 'stylish') == expectation
 
 
 @pytest.fixture
@@ -60,7 +60,7 @@ def stylish_json_file_path2():
 
 def test_stylish_json(stylish_json_file_path1,
                       stylish_json_file_path2):
-    exceptation = """{
+    expectation = """{
     common: {
       + follow: false
         setting1: Value 1
@@ -105,7 +105,7 @@ def test_stylish_json(stylish_json_file_path1,
     }
 }"""
     assert generate_diff(stylish_json_file_path1,
-                         stylish_json_file_path2) == exceptation
+                         stylish_json_file_path2, 'stylish') == expectation
 
 
 @pytest.fixture
@@ -120,7 +120,7 @@ def stylish_yaml_file_path2():
 
 def test_stylish_yaml(stylish_yaml_file_path1,
                       stylish_yaml_file_path2):
-    exceptation = """{
+    expectation = """{
     common: {
       + follow: false
         setting1: Value 1
@@ -165,4 +165,4 @@ def test_stylish_yaml(stylish_yaml_file_path1,
     }
 }"""
     assert generate_diff(stylish_yaml_file_path1,
-                         stylish_yaml_file_path2) == exceptation
+                         stylish_yaml_file_path2, 'stylish') == expectation
