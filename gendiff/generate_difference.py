@@ -23,7 +23,7 @@ def generate_diff(file_path1, file_path2, format):
 
     if format == 'stylish':
         return format_stylish(difference)
-    
+
     if format == 'plain':
         return format_plain(difference)
     # elif formater == '':
