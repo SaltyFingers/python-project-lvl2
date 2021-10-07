@@ -1,12 +1,16 @@
-from gendiff.search_difference import is_dictionary, decode_value
+from json import JSONEncoder
+
+from gendiff.search_difference import is_dictionary
 
 
-def format_stylish(diff):
+def decode_value(value):
+    if type(value) == bool or value is None:
+        return JSONEncoder().encode(value)
+    return str(value)
 
-    return fill_difference(diff)
 
+def format_stylish(diff, depth=0):
 
-def fill_difference(diff, depth=0):
     if not is_dictionary(diff):
         return decode_value(diff)
 
@@ -25,24 +29,24 @@ def fill_difference(diff, depth=0):
 def add_formated_object(key, diff, indent, depth, difference):
     if diff[key]['condition'] == 'deleted':
         obj = (f'{indent}  - {key}: '
-               f'{fill_difference(diff[key]["value"], depth)}')
+               f'{format_stylish(diff[key]["value"], depth)}')
 
     elif diff[key]['condition'] == 'added':
         obj = (f'{indent}  + {key}: '
-               f'{fill_difference(diff[key]["value"], depth)}')
+               f'{format_stylish(diff[key]["value"], depth)}')
 
     elif diff[key]['condition'] == 'equal':
         obj = (f'{indent}    {key}: '
-               f'{fill_difference(diff[key]["value"], depth)}')
+               f'{format_stylish(diff[key]["value"], depth)}')
 
     elif diff[key]['condition'] == 'replaced':
         obj = (f'{indent}  - {key}: '
-               f'{fill_difference(diff[key]["value1"], depth)}\n'
+               f'{format_stylish(diff[key]["value1"], depth)}\n'
                f'{indent}  + {key}: '
-               f'{fill_difference(diff[key]["value2"], depth)}')
+               f'{format_stylish(diff[key]["value2"], depth)}')
 
     elif diff[key]['children']:
         obj = (f'{indent}    {key}: '
-               f'{fill_difference(diff[key]["children"], depth)}')
+               f'{format_stylish(diff[key]["children"], depth)}')
 
     difference.append(obj)

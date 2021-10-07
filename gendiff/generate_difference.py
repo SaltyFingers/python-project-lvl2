@@ -4,6 +4,7 @@ import pathlib
 import yaml
 from gendiff.search_difference import search_difference
 from gendiff.formaters.stylish_formater import format_stylish
+from gendiff.formaters.plain_formater import format_plain
 
 
 def load_file_by_type(file_path):
@@ -22,7 +23,8 @@ def generate_diff(file_path1, file_path2, format):
 
     if format == 'stylish':
         return format_stylish(difference)
-    # elif formater == '':
-    #     return
+    
+    if format == 'plain':
+        return format_plain(difference)
     # elif formater == '':
     #     return

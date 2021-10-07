@@ -1,15 +1,5 @@
-from json import JSONEncoder
-
-
 def is_dictionary(object):
     return isinstance(object, dict)
-
-
-def decode_value(value):
-    if type(value) == bool or value is None:
-        return JSONEncoder().encode(value)
-    else:
-        return str(value)
 
 
 def get_keys(dict1, dict2):
