@@ -30,14 +30,14 @@ def get_formated_object(key, diff, full_path, condition):
     elif condition == 'added':
         return (f"Property '{full_path}' "
                 f"was added with value: {decode_value(diff[key]['value'])}")
-    elif condition == 'replaced':
+    elif condition == 'updated':
         return (f"Property '{full_path}' was updated. "
                 f"From {decode_value(diff[key]['value1'])} "
                 f"to {decode_value(diff[key]['value2'])}")
 
 
 def add_formated_object(key, diff, difference, full_path):
-    if diff[key]['condition'] == 'equal':
+    if diff[key]['condition'] == 'not changed':
         obj = ''
     elif diff[key]['condition'] == 'changed':
         full_path += (f'{key}.')

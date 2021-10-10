@@ -27,14 +27,14 @@ def add_object(key, dict1, dict2, difference):
 
         if dict1[key] == dict2[key]:
             difference[key] = {
-                'condition': 'equal',
+                'condition': 'not changed',
                 'children': None,
                 'value': search_difference(dict1[key]),
             }
 
         elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
             difference[key] = {
-                'condition': 'replaced',
+                'condition': 'updated',
                 'children': None,
                 'value1': search_difference(dict1[key]),
                 'value2': search_difference(dict2[key]),

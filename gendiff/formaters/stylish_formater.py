@@ -35,11 +35,11 @@ def add_formated_object(key, diff, indent, depth, difference):
         obj = (f'{indent}  + {key}: '
                f'{format_stylish(diff[key]["value"], depth)}')
 
-    elif diff[key]['condition'] == 'equal':
+    elif diff[key]['condition'] == 'not changed':
         obj = (f'{indent}    {key}: '
                f'{format_stylish(diff[key]["value"], depth)}')
 
-    elif diff[key]['condition'] == 'replaced':
+    elif diff[key]['condition'] == 'updated':
         obj = (f'{indent}  - {key}: '
                f'{format_stylish(diff[key]["value1"], depth)}\n'
                f'{indent}  + {key}: '
