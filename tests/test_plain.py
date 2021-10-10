@@ -1,6 +1,6 @@
 from gendiff.formaters.plain_formater import decode_value
 import pytest
-from gendiff.generate_diff import generate_diff
+from gendiff.generate_difference import generate_diff
 
 
 @pytest.fixture
