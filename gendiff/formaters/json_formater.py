@@ -23,7 +23,7 @@ def format_json(diff):
             difference.append(', ')
 
     difference.append('}')
-    return (''.join(difference)).rstrip()
+    return ''.join(difference)
 
 
 def add_formated_object(key, diff, difference):

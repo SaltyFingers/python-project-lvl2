@@ -6,7 +6,7 @@ from gendiff.formaters.json_formater import decode_value
 def test_encoding():
     assert decode_value(False) == "false"
     assert decode_value(None) == "null"
-    assert decode_value(100) == '100'
+
 
 @pytest.fixture
 def json_json_file_path1():
