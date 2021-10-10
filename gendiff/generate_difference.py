@@ -27,5 +27,6 @@ def generate_diff(file_path1, file_path2, format):
 
     if format == 'plain':
         return format_plain(difference)
+
     if format == 'json':
         return format_json(difference)
