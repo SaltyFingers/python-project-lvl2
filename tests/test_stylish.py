@@ -60,7 +60,7 @@ def stylish_json_file_path2():
 
 def test_stylish_json(stylish_json_file_path1,
                       stylish_json_file_path2):
-    expectation = """{
+    expectation = ("""{
     common: {
       + follow: false
         setting1: Value 1
@@ -73,8 +73,8 @@ def test_stylish_json(stylish_json_file_path1,
         }
         setting6: {
             doge: {
-              - wow: 
-              + wow: so much
+              - wow: \n"""#noqa
+"""              + wow: so much
             }
             key: value
           + ops: vops
@@ -103,7 +103,7 @@ def test_stylish_json(stylish_json_file_path1,
         }
         fee: 100500
     }
-}"""
+}""")
     assert generate_diff(stylish_json_file_path1,
                          stylish_json_file_path2, 'stylish') == expectation
 
@@ -120,7 +120,7 @@ def stylish_yaml_file_path2():
 
 def test_stylish_yaml(stylish_yaml_file_path1,
                       stylish_yaml_file_path2):
-    expectation = """{
+    expectation = ("""{
     common: {
       + follow: false
         setting1: Value 1
@@ -133,8 +133,8 @@ def test_stylish_yaml(stylish_yaml_file_path1,
         }
         setting6: {
             doge: {
-              - wow: 
-              + wow: so much
+              - wow: \n"""#noqa
+"""              + wow: so much
             }
             key: value
           + ops: vops
@@ -163,6 +163,6 @@ def test_stylish_yaml(stylish_yaml_file_path1,
         }
         fee: 100500
     }
-}"""
+}""")
     assert generate_diff(stylish_yaml_file_path1,
                          stylish_yaml_file_path2, 'stylish') == expectation

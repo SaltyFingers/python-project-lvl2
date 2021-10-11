@@ -20,8 +20,7 @@ def json_json_file_path2():
 
 def test_stylish_json(json_json_file_path1,
                       json_json_file_path2):
-    expectation = (
-"""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
+    expectation = ("""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
 "proxy": {"condition": "deleted", "value": "123.234.53.22"}, "timeout": {"condition": "updated", "value1": 50, "value2": 20}, \
 "verbose": {"condition": "added", "value": true}}""")
     assert generate_diff(json_json_file_path1,
@@ -40,8 +39,7 @@ def json_yaml_file_path2():
 
 def test_stylish_yaml(json_yaml_file_path1,
                       json_yaml_file_path2):
-    expectation = (
-"""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
+    expectation = ("""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
 "proxy": {"condition": "deleted", "value": "123.234.53.22"}, "timeout": {"condition": "updated", "value1": 50, "value2": 20}, \
 "verbose": {"condition": "added", "value": true}}""")
     assert generate_diff(json_yaml_file_path1,

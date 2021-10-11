@@ -1,4 +1,4 @@
-from gendiff.formaters.plain_formater import decode_value
+from gendiff.formaters.plain_formater import format_value
 import pytest
 from gendiff.generate_difference import generate_diff
 
@@ -14,7 +14,7 @@ def stylish_json_file_path2():
 
 
 def test_plain_json(stylish_json_file_path1,
-                      stylish_json_file_path2):
+                    stylish_json_file_path2):
     expectation = """Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
@@ -41,7 +41,7 @@ def stylish_yaml_file_path2():
 
 
 def test_plain_yaml(stylish_yaml_file_path1,
-                      stylish_yaml_file_path2):
+                    stylish_yaml_file_path2):
     expectation = """Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
@@ -58,7 +58,7 @@ Property 'group3' was added with value: [complex value]"""
 
 
 def test_decoding_value():
-    assert decode_value(None) == 'null'
-    assert decode_value(True) == 'true'
-    assert decode_value({'a': 'b'}) == '[complex value]'
-    assert decode_value(300) == "'300'"
+    assert format_value(None) == 'null'
+    assert format_value(True) == 'true'
+    assert format_value({'a': 'b'}) == '[complex value]'
+    assert format_value(300) == 300

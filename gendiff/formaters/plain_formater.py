@@ -12,7 +12,7 @@ def format_value(value):
     elif is_dictionary(value):
         return '[complex value]'
     elif type(value) == int:
-        return f"{value}"
+        return value
     else:
         return f"'{value}'"
 
