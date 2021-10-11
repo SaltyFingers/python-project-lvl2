@@ -10,10 +10,7 @@ from gendiff.formaters.json_formater import format_json
 
 def load_file_by_extension(file_path):
 
-    """Return loaded file by extension (.json or .yml/.yaml)
-    argument:
-    file_path: path to file to load
-    """
+    """Return loaded file in dependence of extension (.json or .yml/.yaml)"""
 
     file_format = pathlib.PurePosixPath(file_path).suffix
     if file_format == '.json':

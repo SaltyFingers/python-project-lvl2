@@ -3,9 +3,9 @@ from json import JSONEncoder
 from gendiff.search_difference import is_dictionary
 
 
-def encode_value(value):
+def format_value(value):
 
-    """Returns encoded value if it necessary"""
+    """Returns formated value if it necessary"""
 
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
@@ -14,14 +14,14 @@ def encode_value(value):
 
 def format_stylish(diff, depth=0):
 
-    """Returns formated difference between two files
+    """Returns formated difference between two files in stylish format
 
     arguments:
     diff: raw differene between two files
     depth: level of nesting to build correct difference"""
 
     if not is_dictionary(diff):
-        return encode_value(diff)
+        return format_value(diff)
 
     keys = sorted(diff.keys())
     indent = " " * depth
