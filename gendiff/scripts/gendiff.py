@@ -8,8 +8,7 @@ def main():
                                      conflict_handler='resolve')
     parser.add_argument('first_file', type=pathlib.Path)
     parser.add_argument('second_file', type=pathlib.Path)
-    parser.add_argument('-f', '--format', dest='format',
-                        metavar='FORMAT', default='stylish',
+    parser.add_argument('-f', '--format', metavar='FORMAT',
                         help='set format of output (default: stylish)')
     args = parser.parse_args()
 

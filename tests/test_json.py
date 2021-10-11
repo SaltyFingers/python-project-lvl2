@@ -1,11 +1,11 @@
 import pytest
 from gendiff.generate_difference import generate_diff
-from gendiff.formaters.json_formater import decode_value
+from gendiff.formaters.json_formater import encode_value
 
 
 def test_encoding():
-    assert decode_value(False) == "false"
-    assert decode_value(None) == "null"
+    assert encode_value(False) == "false"
+    assert encode_value(None) == "null"
 
 
 @pytest.fixture
