@@ -73,8 +73,8 @@ def test_stylish_json(stylish_json_file_path1,
         }
         setting6: {
             doge: {
-              - wow: \n"""#noqa
-"""              + wow: so much
+              - wow: \n"""
+                   """              + wow: so much
             }
             key: value
           + ops: vops
@@ -133,8 +133,8 @@ def test_stylish_yaml(stylish_yaml_file_path1,
         }
         setting6: {
             doge: {
-              - wow: \n"""#noqa
-"""              + wow: so much
+              - wow: \n"""
+                   """              + wow: so much
             }
             key: value
           + ops: vops
