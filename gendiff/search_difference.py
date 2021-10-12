@@ -42,29 +42,27 @@ def add_object(key, dict1, dict2, difference):
             'value': search_difference(dict2[key]),
         }
 
-    else:
+    elif dict1[key] == dict2[key]:
+        difference[key] = {
+            'condition': 'not changed',
+            'children': None,
+            'value': search_difference(dict1[key]),
+        }
 
-        if dict1[key] == dict2[key]:
-            difference[key] = {
-                'condition': 'not changed',
-                'children': None,
-                'value': search_difference(dict1[key]),
-            }
+    elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
+        difference[key] = {
+            'condition': 'updated',
+            'children': None,
+            'value1': search_difference(dict1[key]),
+            'value2': search_difference(dict2[key]),
+        }
 
-        elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
-            difference[key] = {
-                'condition': 'updated',
-                'children': None,
-                'value1': search_difference(dict1[key]),
-                'value2': search_difference(dict2[key]),
-            }
-
-        elif is_dictionary(dict1[key]) and is_dictionary(dict2[key]):
-            difference[key] = {
-                'condition': 'changed',
-                'children': (search_difference(dict1[key], dict2[key])),
-                'value': None,
-            }
+    elif is_dictionary(dict1[key]) and is_dictionary(dict2[key]):
+        difference[key] = {
+            'condition': 'changed',
+            'children': (search_difference(dict1[key], dict2[key])),
+            'value': None,
+        }
 
 
 def search_difference(dict1, dict2=None):
