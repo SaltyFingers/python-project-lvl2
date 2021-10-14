@@ -63,7 +63,7 @@ def add_formated_object(key, diff, difference):
                f'{format_json(diff[key]["value2"])}}}')
 
     elif diff[key]['children']:
-        obj = (f'"{key}": {{"condition": "{condition}", "value": '
+        obj = (f'"{key}": {{"condition": "{condition}", "children": '
                f'{format_json(diff[key]["children"])}}}')
 
     difference.append(obj)
