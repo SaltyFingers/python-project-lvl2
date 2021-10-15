@@ -31,28 +31,24 @@ def add_object(key, dict1, dict2, difference):
     if key in dict1 and key not in dict2:
         difference[key] = {
             'condition': 'deleted',
-            'children': None,
             'value': search_difference(dict1[key]),
         }
 
     elif key in dict2 and key not in dict1:
         difference[key] = {
             'condition': 'added',
-            'children': None,
             'value': search_difference(dict2[key]),
         }
 
     elif dict1[key] == dict2[key]:
         difference[key] = {
             'condition': 'not changed',
-            'children': None,
             'value': search_difference(dict1[key]),
         }
 
     elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
         difference[key] = {
             'condition': 'updated',
-            'children': None,
             'value1': search_difference(dict1[key]),
             'value2': search_difference(dict2[key]),
         }
@@ -61,7 +57,6 @@ def add_object(key, dict1, dict2, difference):
         difference[key] = {
             'condition': 'changed',
             'children': (search_difference(dict1[key], dict2[key])),
-            'value': None,
         }
 
 

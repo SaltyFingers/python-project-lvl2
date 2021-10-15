@@ -1,39 +1,23 @@
 import pytest
 from gendiff.generate_difference import generate_diff, load_file_by_extension
 
-
-@pytest.fixture
-def json_file_path():
-    return 'tests/fixtures/file1.json'
-
-
-@pytest.fixture
-def yaml_file_path():
-    return 'tests/fixtures/file2.yaml'
+FILEPATH_JSON1 = 'tests/fixtures/file1.json'
+FILEPATH_JSON2 = 'tests/fixtures/file2.json'
+FILEPATH_YAML = 'tests/fixtures/file2.yaml'
 
 
-def test_json_file_opening(json_file_path):
+def test_json_file_opening():
     expectation = {"host": "hexlet.io", "timeout": 50,
                    "proxy": "123.234.53.22", "follow": False}
-    assert load_file_by_extension(json_file_path) == expectation
+    assert load_file_by_extension(FILEPATH_JSON1) == expectation
 
 
-def test_yaml_file_opening(yaml_file_path):
+def test_yaml_file_opening():
     expectation = {"timeout": 20, "verbose": True, "host": "hexlet.io"}
-    assert load_file_by_extension(yaml_file_path) == expectation
+    assert load_file_by_extension(FILEPATH_YAML) == expectation
 
 
-@pytest.fixture
-def plain_json_file_path1():
-    return 'tests/fixtures/file1.json'
-
-
-@pytest.fixture
-def plain_json_file_path2():
-    return 'tests/fixtures/file2.json'
-
-
-def test_default_format(plain_json_file_path1, plain_json_file_path2):
-    assert (generate_diff(plain_json_file_path1,
-                          plain_json_file_path2) == generate_diff(
-            plain_json_file_path1, plain_json_file_path2, 'stylish'))
+def test_default_format():
+    assert (generate_diff(FILEPATH_JSON1,
+                          FILEPATH_JSON2) == generate_diff(
+            FILEPATH_JSON1, FILEPATH_JSON2, 'stylish'))

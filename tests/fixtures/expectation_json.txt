@@ -1,0 +1,1 @@
+{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, "proxy": {"condition": "deleted", "value": "123.234.53.22"}, "timeout": {"condition": "updated", "value1": 50, "value2": 20}, "verbose": {"condition": "added", "value": true}}

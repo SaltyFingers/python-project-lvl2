@@ -7,40 +7,19 @@ def test_encoding():
     assert encode_value(False) == "false"
     assert encode_value(None) == "null"
 
-
-@pytest.fixture
-def json_json_file_path1():
-    return 'tests/fixtures/file1.json'
-
-
-@pytest.fixture
-def json_json_file_path2():
-    return 'tests/fixtures/file2.json'
+FILEPATH_JSON1 = 'tests/fixtures/file1.json'
+FILEPATH_JSON2 = 'tests/fixtures/file2.json'
+FILEPATH_YAML1 = 'tests/fixtures/file1.yaml'
+FILEPATH_YAML2 = 'tests/fixtures/file2.yaml'
 
 
-def test_stylish_json(json_json_file_path1,
-                      json_json_file_path2):
-    expectation = ("""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
-"proxy": {"condition": "deleted", "value": "123.234.53.22"}, "timeout": {"condition": "updated", "value1": 50, "value2": 20}, \
-"verbose": {"condition": "added", "value": true}}""")
-    assert generate_diff(json_json_file_path1,
-                         json_json_file_path2, 'json') == expectation
+def test_stylish_json():
+    expectation = open('tests/fixtures/expectation_json.txt', 'r').read()
+    assert generate_diff(FILEPATH_JSON1,
+                         FILEPATH_JSON2, 'json') == expectation
 
 
-@pytest.fixture
-def json_yaml_file_path1():
-    return 'tests/fixtures/file1.yaml'
-
-
-@pytest.fixture
-def json_yaml_file_path2():
-    return 'tests/fixtures/file2.yaml'
-
-
-def test_stylish_yaml(json_yaml_file_path1,
-                      json_yaml_file_path2):
-    expectation = ("""{"follow": {"condition": "deleted", "value": false}, "host": {"condition": "not changed", "value": "hexlet.io"}, \
-"proxy": {"condition": "deleted", "value": "123.234.53.22"}, "timeout": {"condition": "updated", "value1": 50, "value2": 20}, \
-"verbose": {"condition": "added", "value": true}}""")
-    assert generate_diff(json_yaml_file_path1,
-                         json_yaml_file_path2, 'json') == expectation
+def test_stylish_yaml():
+    expectation = open('tests/fixtures/expectation_json.txt', 'r').read()
+    assert generate_diff(FILEPATH_YAML1,
+                         FILEPATH_YAML2, 'json') == expectation

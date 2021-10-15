@@ -20,12 +20,12 @@ def test_search_difference():
     dict1 = {"a": "aa", "b": "bb", "d": {"dd": "ddd"}}
     dict2 = {"b": "bbb", "c": "cc", "d": {"dd": "dddd"}}
     expectation = (
-    {'a': {'condition': 'deleted', 'children': None, 'value': 'aa'},  # noqa
-     'b': {'condition': 'updated', 'children': None, 'value1': 'bb',
+    {'a': {'condition': 'deleted', 'value': 'aa'},  # noqa
+     'b': {'condition': 'updated', 'value1': 'bb',
            'value2': 'bbb'},
-     'c': {'condition': 'added', 'children': None, 'value': 'cc'},
+     'c': {'condition': 'added', 'value': 'cc'},
      'd': {'condition': 'changed', 'children':
-           {'dd': {'condition': 'updated', 'children': None,
-                   'value1': 'ddd', 'value2': 'dddd'}}, 'value': None}
+           {'dd': {'condition': 'updated',
+                   'value1': 'ddd', 'value2': 'dddd'}}}
      })
     assert search_difference(dict1, dict2) == expectation
