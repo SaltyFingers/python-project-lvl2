@@ -1,7 +1,5 @@
 from gendiff.formaters.plain_formater import format_value
-import pytest
 from gendiff.generate_difference import generate_diff
-
 
 FILEPATH_JSON1 = 'tests/fixtures/file1_2.json'
 FILEPATH_JSON2 = 'tests/fixtures/file2_2.json'
@@ -13,7 +11,6 @@ def test_plain_json():
     expectation = open('tests/fixtures/expectation_plain.txt', 'r').read()
     assert generate_diff(FILEPATH_JSON1,
                          FILEPATH_JSON2, 'plain') == expectation
-
 
 
 def test_plain_yaml():

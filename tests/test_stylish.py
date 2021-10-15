@@ -1,4 +1,3 @@
-import pytest
 from gendiff.generate_difference import generate_diff
 
 FILEPATH_JSON1 = 'tests/fixtures/file1_2.json'

@@ -1,4 +1,3 @@
-import pytest
 from gendiff.generate_difference import generate_diff, load_file_by_extension
 
 FILEPATH_JSON1 = 'tests/fixtures/file1.json'
