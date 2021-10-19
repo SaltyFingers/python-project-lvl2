@@ -84,14 +84,3 @@ def format_nested_object(diff):
         obj = encode_value(diff)
         nested_diff.append(obj)
     return ''.join(nested_diff)
-
-# import json
-
-# def format_json(diff):
-
-#     """Returns formated difference between two files if json format
-
-#     arguments:
-#     diff: raw differene between two files"""
-
-#     return json.dumps(diff)
