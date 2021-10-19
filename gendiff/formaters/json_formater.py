@@ -26,7 +26,7 @@ def format_json(diff):
         obj = ', '.join(strings)
 
     difference.append(obj)
-    difference.append('},')
+    difference.append('}')
     return ''.join(difference)
 
 
@@ -72,8 +72,8 @@ def format_nested_object(diff):
         keys = diff.keys()
         count = 0
         for key in keys:
-            obj = (f'"{key}": "value": '
-                   f'{format_nested_object(diff[key])}')
+            obj = (f'"{key}": '
+                   f'{format_nested_object(diff[key])}}}')
             nested_diff.append(obj)
             count += 1
             if count < len(keys):
@@ -82,3 +82,14 @@ def format_nested_object(diff):
         obj = encode_value(diff)
         nested_diff.append(obj)
     return ''.join(nested_diff)
+
+# import json
+
+# def format_json(diff):
+
+#     """Returns formated difference between two files if json format
+
+#     arguments:
+#     diff: raw differene between two files"""
+
+#     return json.dumps(diff)
