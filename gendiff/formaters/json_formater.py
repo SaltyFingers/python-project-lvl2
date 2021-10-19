@@ -26,7 +26,7 @@ def format_json(diff):
         obj = ', '.join(strings)
 
     difference.append(obj)
-    difference.append('}')
+    difference.append('},')
     return ''.join(difference)
 
 
@@ -72,7 +72,7 @@ def format_nested_object(diff):
         keys = diff.keys()
         count = 0
         for key in keys:
-            obj = (f'"{key}": '
+            obj = (f'"{key}": "value": '
                    f'{format_nested_object(diff[key])}')
             nested_diff.append(obj)
             count += 1
