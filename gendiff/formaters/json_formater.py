@@ -73,11 +73,13 @@ def format_nested_object(diff):
         count = 0
         for key in keys:
             obj = (f'"{key}": '
-                   f'{format_nested_object(diff[key])}}}')
+                   f'{format_nested_object(diff[key])}')
             nested_diff.append(obj)
             count += 1
             if count < len(keys):
                 nested_diff.append(', ')
+            elif count == len(keys):
+                nested_diff.append('}')
     else:
         obj = encode_value(diff)
         nested_diff.append(obj)
