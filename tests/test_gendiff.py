@@ -10,11 +10,10 @@ FILEPATH_WRONG = 'tests/fixtures/expectation_json.txt'
 @pytest.mark.parametrize('test_input, expected', [
     (FILEPATH_JSON1, {"host": "hexlet.io", "timeout": 50,
                       "proxy": "123.234.53.22", "follow": False}),
-    (FILEPATH_YAML, {"timeout": 20, "verbose": True, "host": "hexlet.io"}),
-                          ])
+    (FILEPATH_YAML, {"timeout": 20, "verbose": True, "host": "hexlet.io"})])
 def test_opening(test_input, expected):
     assert load_file_by_extension(test_input) == expected
-    
+
     with pytest.raises(Exception):
         load_file_by_extension(FILEPATH_WRONG)
 
