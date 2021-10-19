@@ -17,7 +17,6 @@ def format_json(diff):
     arguments:
     diff: raw differene between two files"""
 
-
     keys = sorted(diff.keys())
     difference = ['{']
 
@@ -67,7 +66,6 @@ def add_formated_object(key, diff):
 
 
 def format_nested_object(diff):
-
     nested_diff = []
     if is_dictionary(diff):
         nested_diff.append('{')
