@@ -72,7 +72,7 @@ def format_nested_object(diff):
         keys = diff.keys()
         count = 0
         for key in keys:
-            obj = (f'"{key}":  "value": '
+            obj = (f'"{key}": '
                    f'{format_nested_object(diff[key])}')
             nested_diff.append(obj)
             count += 1
