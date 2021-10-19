@@ -68,7 +68,7 @@ def add_formated_object(key, diff, difference, full_path):
 
     if diff[key]['condition'] == 'not changed':
         obj = ''
-    elif diff[key]['condition'] == 'changed':
+    elif diff[key]['condition'] == 'nested':
         full_path += (f'{key}.')
         obj = format_plain(diff[key]['children'], full_path)
     else:

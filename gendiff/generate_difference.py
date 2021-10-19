@@ -17,6 +17,8 @@ def load_file_by_extension(file_path):
         file = json.load(open(file_path))
     elif file_format == '.yml' or file_format == '.yaml':
         file = yaml.safe_load(open(file_path))
+    else:
+        raise TypeError('Wrong extension!')
     return file
 
 

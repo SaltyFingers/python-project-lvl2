@@ -24,7 +24,7 @@ def test_search_difference():
      'b': {'condition': 'updated', 'value1': 'bb',
            'value2': 'bbb'},
      'c': {'condition': 'added', 'value': 'cc'},
-     'd': {'condition': 'changed', 'children':
+     'd': {'condition': 'nested', 'children':
            {'dd': {'condition': 'updated',
                    'value1': 'ddd', 'value2': 'dddd'}}}
      })

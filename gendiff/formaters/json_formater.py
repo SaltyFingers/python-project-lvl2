@@ -62,7 +62,7 @@ def add_formated_object(key, diff, difference):
                f'{format_json(diff[key]["value1"])}, "value2": '
                f'{format_json(diff[key]["value2"])}}}')
 
-    elif diff[key]['children']:
+    elif condition == 'nested':
         obj = (f'"{key}": {{"condition": "{condition}", "children": '
                f'{format_json(diff[key]["children"])}}}')
 

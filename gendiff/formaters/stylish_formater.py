@@ -9,33 +9,29 @@ def format_value(value):
 
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
-    return value
+    return str(value)
 
 
 def format_stylish(diff, depth=0):
-
     """Returns formated difference between two files in stylish format
 
     arguments:
     diff: raw differene between two files
     depth: level of nesting to build correct difference"""
 
-    if not is_dictionary(diff):
-        return format_value(diff)
-
-    keys = sorted(diff.keys())
     indent = " " * depth
     difference = ['{']
-    depth += 4
-
+    keys = diff.keys()
     for key in keys:
-        add_formated_object(key, diff, indent, depth, difference)
-
+        strings = map(lambda key: get_formated_object(
+                      key, diff, indent, depth), keys)
+        obj = '\n'.join(strings)
+    difference.append(obj)
     difference.append(f'{indent}}}')
     return '\n'.join(difference)
 
 
-def add_formated_object(key, diff, indent, depth, difference):
+def get_formated_object(key, diff, indent, depth):
 
     """Add formated object to formated difference in depending of it's condition
 
@@ -46,26 +42,43 @@ def add_formated_object(key, diff, indent, depth, difference):
     depth: level of nesting in that moment
     difference: formated difference"""
 
-    if diff[key]['condition'] == 'deleted':
-        obj = (f'{indent}  - {key}: '
-               f'{format_stylish(diff[key]["value"], depth)}')
+    condition = diff[key]['condition']
 
-    elif diff[key]['condition'] == 'added':
+    if condition == 'deleted':
+        obj = (f'{indent}  - {key}: '
+               f'{format_nested_object(diff[key]["value"], depth + 4)}')
+
+    elif condition == 'added':
         obj = (f'{indent}  + {key}: '
-               f'{format_stylish(diff[key]["value"], depth)}')
+               f'{format_nested_object(diff[key]["value"], depth + 4)}')
 
-    elif diff[key]['condition'] == 'not changed':
+    elif condition == 'not changed':
         obj = (f'{indent}    {key}: '
-               f'{format_stylish(diff[key]["value"], depth)}')
+               f'{format_nested_object(diff[key]["value"], depth + 4)}')
 
-    elif diff[key]['condition'] == 'updated':
+    elif condition == 'updated':
         obj = (f'{indent}  - {key}: '
-               f'{format_stylish(diff[key]["value1"], depth)}\n'
+               f'{format_nested_object(diff[key]["value1"], depth + 4)}\n'
                f'{indent}  + {key}: '
-               f'{format_stylish(diff[key]["value2"], depth)}')
-
-    elif diff[key]['children']:
+               f'{format_nested_object(diff[key]["value2"], depth + 4)}')
+    elif condition == 'nested':
         obj = (f'{indent}    {key}: '
-               f'{format_stylish(diff[key]["children"], depth)}')
+               f'{format_stylish(diff[key]["children"], depth + 4)}')
+    return obj
 
-    difference.append(obj)
+
+def format_nested_object(diff, depth):
+    indent = ' ' * depth
+    nested_diff = []
+    if is_dictionary(diff):
+        nested_diff.append('{')
+        keys = diff.keys()
+        for key in keys:
+            obj = (f'{indent}    {key}: '
+                   f'{format_nested_object(diff[key], depth + 4)}')
+            nested_diff.append(obj)
+        nested_diff.append(f'{indent}}}')
+    else:
+        obj = format_value(diff)
+        nested_diff.append(obj)
+    return '\n'.join(nested_diff)
