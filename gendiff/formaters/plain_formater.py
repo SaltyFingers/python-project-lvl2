@@ -30,7 +30,17 @@ def format_plain(diff, path=''):
 
     for key in keys:
         full_path = path
-        add_formated_object(key, diff, difference, full_path)
+        if diff[key]['condition'] == 'not changed':
+            obj = ''
+        elif diff[key]['condition'] == 'nested':
+            full_path += (f'{key}.')
+            obj = format_plain(diff[key]['children'], full_path)
+        else:
+            condition = diff[key]['condition']
+            full_path += (f'{key}')
+            obj = get_formated_object(key, diff, full_path, condition)
+        if obj:
+            difference.append(obj)
 
     return '\n'.join(difference)
 
@@ -54,26 +64,3 @@ def get_formated_object(key, diff, full_path, condition):
         return (f"Property '{full_path}' was updated. "
                 f"From {format_value(diff[key]['value1'])} "
                 f"to {format_value(diff[key]['value2'])}")
-
-
-def add_formated_object(key, diff, difference, full_path):
-
-    """Add formated object to formated difference in depending of it's condition
-
-    arguments:
-    key: current key in diff
-    diff: part of full difference (value)
-    difference: formated difference
-    full_path: full path to value"""
-
-    if diff[key]['condition'] == 'not changed':
-        obj = ''
-    elif diff[key]['condition'] == 'nested':
-        full_path += (f'{key}.')
-        obj = format_plain(diff[key]['children'], full_path)
-    else:
-        condition = diff[key]['condition']
-        full_path += (f'{key}')
-        obj = get_formated_object(key, diff, full_path, condition)
-    if obj:
-        difference.append(obj)
