@@ -1,8 +1,14 @@
+
+
 def is_dictionary(object):
 
     """Return True if object is dictionary, of False if not."""
 
     return isinstance(object, dict)
+
+
+def is_nested(object1, object2):
+    return isinstance(object1, dict) and isinstance(object2, dict)
 
 
 def get_keys(dict1, dict2):
@@ -32,32 +38,32 @@ def search_difference(dict1, dict2):
     for key in keys:
         if key in dict1 and key not in dict2:
             difference[key] = {
-                'condition': 'deleted',
+                'status': 'removed',
                 'value': dict1.get(key),
             }
 
         elif key in dict2 and key not in dict1:
             difference[key] = {
-                'condition': 'added',
+                'status': 'added',
                 'value': dict2.get(key),
             }
 
         elif dict1[key] == dict2[key]:
             difference[key] = {
-                'condition': 'not changed',
+                'status': 'not changed',
                 'value': dict1.get(key),
             }
 
         elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
             difference[key] = {
-                'condition': 'updated',
+                'status': 'updated',
                 'value1': dict1.get(key),
                 'value2': dict2.get(key),
             }
 
-        elif is_dictionary(dict1[key]) and is_dictionary(dict2[key]):
+        elif is_nested(dict1[key], dict2[key]):
             difference[key] = {
-                'condition': 'nested',
+                'status': 'nested',
                 'children': (search_difference(dict1[key], dict2[key])),
             }
     return difference

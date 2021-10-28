@@ -30,37 +30,37 @@ def format_plain(diff, path=''):
 
     for key in keys:
         full_path = path
-        if diff[key]['condition'] == 'not changed':
+        if diff[key]['status'] == 'not changed':
             obj = ''
-        elif diff[key]['condition'] == 'nested':
+        elif diff[key]['status'] == 'nested':
             full_path += (f'{key}.')
             obj = format_plain(diff[key]['children'], full_path)
         else:
-            condition = diff[key]['condition']
+            status = diff[key]['status']
             full_path += (f'{key}')
-            obj = get_formated_object(key, diff, full_path, condition)
+            obj = get_formated_object(key, diff, full_path, status)
         if obj:
             difference.append(obj)
 
     return '\n'.join(difference)
 
 
-def get_formated_object(key, diff, full_path, condition):
+def get_formated_object(key, diff, full_path, status):
 
-    """Make string in depending of value's condition
+    """Make string in depending of value's status
 
     arguments:
     key: current key in diff
     diff: part of full difference (value)
     full_path: full path to value
-    condition: condition of value in diff"""
+    status: status of value in diff"""
 
-    if condition == 'deleted':
+    if status == 'removed':
         return (f"Property '{full_path}' was removed")
-    elif condition == 'added':
+    elif status == 'added':
         return (f"Property '{full_path}' "
                 f"was added with value: {format_value(diff[key]['value'])}")
-    elif condition == 'updated':
+    elif status == 'updated':
         return (f"Property '{full_path}' was updated. "
                 f"From {format_value(diff[key]['value1'])} "
                 f"to {format_value(diff[key]['value2'])}")

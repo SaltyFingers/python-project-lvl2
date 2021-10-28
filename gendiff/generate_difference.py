@@ -8,20 +8,6 @@ from gendiff.formaters.plain_formater import format_plain
 from gendiff.formaters.json_formater import format_json
 
 
-def load_file_by_extension(file_path):
-
-    """Return loaded file in dependence of extension (.json or .yml/.yaml)"""
-
-    file_format = pathlib.PurePosixPath(file_path).suffix
-    if file_format == '.json':
-        file = json.load(open(file_path))
-    elif file_format == '.yml' or file_format == '.yaml':
-        file = yaml.safe_load(open(file_path))
-    else:
-        raise TypeError('Wrong extension!')
-    return file
-
-
 def generate_diff(file_path1, file_path2, format='stylish'):
 
     """Return string representation of difference beween two files.
@@ -30,10 +16,19 @@ def generate_diff(file_path1, file_path2, format='stylish'):
     file_path2: path to second file
     format: selector of output format (default: stylish format)
     """
+    file1_format = pathlib.PurePosixPath(file_path1).suffix
 
-    first_file, second_file = (load_file_by_extension(file_path1),
-                               load_file_by_extension(file_path2))
-    difference = search_difference(first_file, second_file)
+    if file1_format == '.json':
+        first_dict = json.load(open(file_path1))
+        second_dict = json.load(open(file_path2))
+    elif file1_format == '.yml' or file1_format == '.yaml':
+        first_dict = yaml.safe_load(open(file_path1))
+        second_dict = yaml.safe_load(open(file_path2))
+
+    else:
+        raise TypeError('Wrong extension!')
+
+    difference = search_difference(first_dict, second_dict)
 
     if format == 'stylish':
         return format_stylish(difference)
