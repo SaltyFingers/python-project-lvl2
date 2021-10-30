@@ -7,6 +7,7 @@ prefixes = {
     'removed': '  - ',
     'added': '  + ',
     'not changed': '    ',
+    'updated': '    ',
     'nested': '    '
 }
 
@@ -42,7 +43,7 @@ def format_stylish(diff, depth=0):
                    f'{format_nested_object(diff[key]["value2"], depth + 1)}')
 
         elif status == 'nested':
-            obj = (f'{indent}{prefixes["nested"]}{key}: '
+            obj = (f'{indent}{prefixes[status]}{key}: '
                    f'{format_stylish(diff[key]["children"], depth + 1)}')
 
         else:

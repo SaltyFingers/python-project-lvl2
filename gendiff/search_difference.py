@@ -1,9 +1,6 @@
-
-
 def is_dictionary(object):
 
     """Return True if object is dictionary, of False if not."""
-
     return isinstance(object, dict)
 
 
@@ -12,58 +9,71 @@ def is_nested(object1, object2):
 
 
 def get_keys(dict1, dict2):
-
-    """Return set of keys in two dictionaries.
+    """
+    Return set of keys in two dictionaries.
     arguments:
     dict1: first dictionary
     dict2: second dictionary
     """
-
-    first_keys = list(dict1.keys())
-    second_keys = list(dict2.keys())
-    return set(first_keys + second_keys)
+    return set(list(dict1.keys()) + list(dict2.keys()))
 
 
 def search_difference(dict1, dict2):
-
-    """Return raw difference between two dictionaries (files).
+    """
+    Return raw difference between two dictionaries (files).
     arguments:
     dict1: first dictionary
-    dict2: second dictionary (default: None if key only in one dictionary)
+    dict2: second dictionary
     """
-
     keys = sorted(get_keys(dict1, dict2))
     difference = {}
 
     for key in keys:
-        if key in dict1 and key not in dict2:
-            difference[key] = {
-                'status': 'removed',
-                'value': dict1.get(key),
-            }
 
-        elif key in dict2 and key not in dict1:
-            difference[key] = {
-                'status': 'added',
-                'value': dict2.get(key),
-            }
+        status = get_status(dict1, dict2, key)
+        values = get_value(dict1, dict2, key, status['status'])
+        difference[key] = status
+        difference[key].update(values)
 
-        elif dict1[key] == dict2[key]:
-            difference[key] = {
-                'status': 'not changed',
-                'value': dict1.get(key),
-            }
-
-        elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
-            difference[key] = {
-                'status': 'updated',
-                'value1': dict1.get(key),
-                'value2': dict2.get(key),
-            }
-
-        elif is_nested(dict1[key], dict2[key]):
-            difference[key] = {
-                'status': 'nested',
-                'children': (search_difference(dict1[key], dict2[key])),
-            }
     return difference
+
+
+def get_status(dict1, dict2, key):
+    """
+    Return status of key in difference.
+    arguments:
+    dict1: first dictionary
+    dict2: second dictionary
+    key: current key
+    """
+    if key in dict1 and key not in dict2:
+        return {'status': 'removed'}
+    elif key in dict2 and key not in dict1:
+        return {'status': 'added'}
+    elif dict1[key] == dict2[key]:
+        return {'status': 'not changed'}
+    elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
+        return {'status': 'updated'}
+    elif is_nested(dict1[key], dict2[key]):
+        return {'status': 'nested'}
+
+
+def get_value(dict1, dict2, key, status):
+    """
+    Return value of key in difference.
+    arguments:
+    dict1: first dictionary
+    dict2: second dictionary
+    key: current key
+    status: status of key in difference
+    """
+    if status == 'removed':
+        return {'value': dict1.get(key)}
+    elif status == 'added':
+        return {'value': dict2.get(key)}
+    elif status == 'not changed':
+        return {'value': dict1.get(key)}
+    elif status == 'updated':
+        return {'value1': dict1.get(key), 'value2': dict2.get(key)}
+    elif status == 'nested':
+        return {'children': search_difference(dict1[key], dict2[key])}
