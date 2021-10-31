@@ -1,4 +1,3 @@
-from gendiff.formaters.plain_formater import format_value
 from gendiff.formaters.stylish_formater import (
     format_value, format_nested_object)
 
