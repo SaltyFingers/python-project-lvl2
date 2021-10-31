@@ -62,7 +62,7 @@ def format_nested_object(diff, depth):
         nested_diff.append('{')
         keys = diff.keys()
         for key in keys:
-            obj = (f'{indent}    {key}: '
+            obj = (f'{indent}{prefixes["not changed"]}{key}: '
                    f'{format_nested_object(diff[key], depth + 1)}')
             nested_diff.append(obj)
         nested_diff.append(f'{indent}}}')
