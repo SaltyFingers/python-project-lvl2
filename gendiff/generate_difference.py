@@ -18,16 +18,10 @@ def generate_diff(file_path1, file_path2, format='stylish'):
     """
     file1_format = pathlib.PurePosixPath(file_path1).suffix
 
-    if file1_format == '.json':
-        first_dict = json.load(open(file_path1))
-        second_dict = json.load(open(file_path2))
-    elif file1_format == '.yml' or file1_format == '.yaml':
-        first_dict = yaml.safe_load(open(file_path1))
-        second_dict = yaml.safe_load(open(file_path2))
-
-    else:
-        raise TypeError('Wrong extension!')
-
+    first_string = open(file_path1)
+    second_string = open(file_path2)
+    first_dict, second_dict = get_dict_from_string(
+        first_string, second_string, file1_format)
     difference = search_difference(first_dict, second_dict)
 
     if format == 'stylish':
@@ -38,3 +32,12 @@ def generate_diff(file_path1, file_path2, format='stylish'):
 
     if format == 'json':
         return format_json(difference)
+
+
+def get_dict_from_string(first_string, second_string, suffix):
+    if suffix == '.json':
+        return json.load(first_string), json.load(second_string)
+    elif suffix == '.yaml' or suffix == '.yml':
+        return yaml.safe_load(first_string), yaml.safe_load(second_string)
+    else:
+        raise TypeError('Wrong extension!')

@@ -29,53 +29,34 @@ def search_difference(dict1, dict2):
     difference = {}
 
     for key in keys:
-
-        status = get_status(dict1, dict2, key)
-        values = get_value(dict1, dict2, key, status['status'])
-        difference[key] = status
-        difference[key].update(values)
-
+        difference[key] = get_value(dict1, dict2, key)
     return difference
 
 
-def get_status(dict1, dict2, key):
-    """
-    Return status of key in difference.
-    arguments:
-    dict1: first dictionary
-    dict2: second dictionary
-    key: current key
-    """
+def get_value(dict1, dict2, key):
     if key in dict1 and key not in dict2:
-        status = {'status': 'removed'}
+        value = {
+            'status': 'removed',
+            'value': dict1.get(key)}
+
     elif key in dict2 and key not in dict1:
-        status = {'status': 'added'}
+        value = {
+            'status': 'added',
+            'value': dict2.get(key)}
+
     elif dict1[key] == dict2[key]:
-        status = {'status': 'not changed'}
+        value = {
+            'status': 'not changed',
+            'value': dict1.get(key)}
+
     elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
-        status = {'status': 'updated'}
+        value = {
+            'status': 'updated',
+            'value1': dict1.get(key),
+            'value2': dict2.get(key)}
+
     elif is_nested(dict1[key], dict2[key]):
-        status = {'status': 'nested'}
-    return status
-
-
-def get_value(dict1, dict2, key, status):
-    """
-    Return value of key in difference.
-    arguments:
-    dict1: first dictionary
-    dict2: second dictionary
-    key: current key
-    status: status of key in difference
-    """
-    if status == 'removed':
-        value = {'value': dict1.get(key)}
-    elif status == 'added':
-        value = {'value': dict2.get(key)}
-    elif status == 'not changed':
-        value = {'value': dict1.get(key)}
-    elif status == 'updated':
-        value = {'value1': dict1.get(key), 'value2': dict2.get(key)}
-    elif status == 'nested':
-        value = {'children': search_difference(dict1[key], dict2[key])}
+        value = {
+            'status': 'nested',
+            'children': search_difference(dict1[key], dict2[key])}
     return value

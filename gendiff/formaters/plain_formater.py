@@ -29,18 +29,11 @@ def format_plain(diff, path=''):
     difference = []
 
     for key in keys:
+        status = diff[key]['status']
         full_path = path
-        if diff[key]['status'] == 'not changed':
-            obj = ''
-        elif diff[key]['status'] == 'nested':
-            full_path += (f'{key}.')
-            obj = format_plain(diff[key]['children'], full_path)
-        else:
-            status = diff[key]['status']
-            full_path += (f'{key}')
-            obj = get_formated_object(key, diff, full_path, status)
-        if obj:
-            difference.append(obj)
+        string = get_formated_object(key, diff, full_path, status)
+        if string:
+            difference.append(string)
 
     return '\n'.join(difference)
 
@@ -55,12 +48,25 @@ def get_formated_object(key, diff, full_path, status):
     full_path: full path to value
     status: status of value in diff"""
 
-    if status == 'removed':
-        return (f"Property '{full_path}' was removed")
+    if status == 'not changed':
+        string = ''
+
+    elif status == 'nested':
+        full_path += (f'{key}.')
+        string = format_plain(diff[key]['children'], full_path)
+
+    elif status == 'removed':
+        full_path += (f'{key}')
+        string = (f"Property '{full_path}' was removed")
+
     elif status == 'added':
-        return (f"Property '{full_path}' "
-                f"was added with value: {format_value(diff[key]['value'])}")
+        full_path += (f'{key}')
+        string = (f"Property '{full_path}' "
+                  f"was added with value: {format_value(diff[key]['value'])}")
+
     elif status == 'updated':
-        return (f"Property '{full_path}' was updated. "
-                f"From {format_value(diff[key]['value1'])} "
-                f"to {format_value(diff[key]['value2'])}")
+        full_path += (f'{key}')
+        string = (f"Property '{full_path}' was updated. "
+                  f"From {format_value(diff[key]['value1'])} "
+                  f"to {format_value(diff[key]['value2'])}")
+    return string

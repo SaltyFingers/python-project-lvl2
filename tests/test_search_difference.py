@@ -2,6 +2,7 @@ from gendiff.search_difference import (
     get_keys,
     is_dictionary,
     search_difference,
+    get_value
 )
 
 
@@ -29,3 +30,17 @@ def test_search_difference():
                    'value1': 'ddd', 'value2': 'dddd'}}}
      })
     assert search_difference(dict1, dict2) == expectation
+
+
+def test_get_value():
+    dict1 = {"a": "aa", "b": "bb"}
+    dict2 = {"b": "bb", "c": "cc"}
+    assert get_value(dict1, dict2, 'a') == {
+        'status': 'removed',
+        'value': 'aa'}
+    assert get_value(dict1, dict2, 'b') == {
+        'status': 'not changed',
+        'value': 'bb'}
+    assert get_value(dict1, dict2, 'c') == {
+        'status': 'added',
+        'value': 'cc'}
