@@ -27,13 +27,19 @@ def search_difference(dict1, dict2):
     """
     keys = sorted(get_keys(dict1, dict2))
     difference = {}
-
     for key in keys:
         difference[key] = get_value(dict1, dict2, key)
     return difference
 
 
 def get_value(dict1, dict2, key):
+    """
+    Return value of node in raw difference.
+    arguments:
+    dict1: first dictionary
+    dict2: second dictionary
+    key: current key
+    """
     if key in dict1 and key not in dict2:
         value = {
             'status': 'removed',

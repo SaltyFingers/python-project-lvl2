@@ -4,9 +4,7 @@ from gendiff.search_difference import is_dictionary
 
 
 def format_value(value):
-
     """Returns formated value if it necessary"""
-
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
     elif is_dictionary(value):
@@ -18,36 +16,31 @@ def format_value(value):
 
 
 def format_plain(diff, path=''):
-
     """Returns formated difference between two files if plain format
-
     arguments:
     diff: raw differene between two files
-    path: path to value (default: '') using to build full path"""
-
+    path: path to value (default: '') using to build full path
+    """
     keys = sorted(diff.keys())
     difference = []
-
     for key in keys:
         status = diff[key]['status']
         full_path = path
         string = get_formated_object(key, diff, full_path, status)
         if string:
             difference.append(string)
-
     return '\n'.join(difference)
 
 
 def get_formated_object(key, diff, full_path, status):
-
-    """Make string in depending of value's status
-
+    """
+    Make string in depending of value's status
     arguments:
     key: current key in diff
     diff: part of full difference (value)
     full_path: full path to value
-    status: status of value in diff"""
-
+    status: status of value in diff
+    """
     if status == 'not changed':
         string = ''
 
