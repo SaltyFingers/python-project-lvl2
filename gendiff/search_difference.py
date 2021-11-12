@@ -4,10 +4,6 @@ def is_dictionary(object):
     return isinstance(object, dict)
 
 
-def is_nested(object1, object2):
-    return isinstance(object1, dict) and isinstance(object2, dict)
-
-
 def get_keys(dict1, dict2):
     """
     Return set of keys in two dictionaries.
@@ -61,7 +57,7 @@ def get_value(dict1, dict2, key):
             'value1': dict1.get(key),
             'value2': dict2.get(key)}
 
-    elif is_nested(dict1[key], dict2[key]):
+    elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
         value = {
             'status': 'nested',
             'children': search_difference(dict1[key], dict2[key])}

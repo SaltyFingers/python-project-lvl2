@@ -16,7 +16,7 @@ def format_value(value, depth=0):
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
     elif is_dictionary(value):
-        return format_nested_object(value, depth + 1)
+        return get_formated_dictionary(value, depth + 1)
     return str(value)
 
 
@@ -73,9 +73,9 @@ def get_formated_string(indent, status, diff, key, depth):
     return string
 
 
-def format_nested_object(diff, depth):
+def get_formated_dictionary(diff, depth):
     """
-    Return string representation of nested nodes
+    Return string representation of value if it's dictionary
     arguments:
     diff: difference between two files
     depth: node's level of nesting
@@ -87,7 +87,7 @@ def format_nested_object(diff, depth):
         keys = diff.keys()
         for key in keys:
             string = (f'{indent}{prefixes["not changed"]}{key}: '
-                      f'{format_nested_object(diff[key], depth + 1)}')
+                      f'{get_formated_dictionary(diff[key], depth + 1)}')
             nested_diff.append(string)
         nested_diff.append(f'{indent}}}')
     else:
