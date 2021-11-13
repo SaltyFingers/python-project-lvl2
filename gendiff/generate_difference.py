@@ -16,17 +16,15 @@ def generate_diff(file_path1, file_path2, format='stylish'):
     file_path2: path to second file
     format: selector of output format (default: stylish format)
     """
+    file1_extension = pathlib.PurePosixPath(file_path1).suffix
+    file2_extension = pathlib.PurePosixPath(file_path2).suffix
 
     with open(file_path1, 'r') as first_object:
-        first_string = first_object.read()
+        first_dict = get_dict_from_string(first_object.read(),
+                                          file1_extension)
     with open(file_path2, 'r') as second_object:
-        second_string = second_object.read()
-
-    file1_format = pathlib.PurePosixPath(file_path1).suffix
-    file2_format = pathlib.PurePosixPath(file_path2).suffix
-
-    first_dict = get_dict_from_string(first_string, file1_format)
-    second_dict = get_dict_from_string(second_string, file2_format)
+        second_dict = get_dict_from_string(second_object.read(),
+                                           file2_extension)
 
     difference = search_difference(first_dict, second_dict)
 
@@ -40,7 +38,7 @@ def generate_diff(file_path1, file_path2, format='stylish'):
         return format_json(difference)
 
 
-def get_dict_from_string(string, suffix):
+def get_dict_from_string(string, extension):
     """
     Return dictionary from string representation of both files.
     arguments:
@@ -48,10 +46,10 @@ def get_dict_from_string(string, suffix):
     second_string: string representation of second file
     suffix: extension of files
     """
-    if suffix == '.json':
+    if extension == '.json':
         return json.loads(string)
 
-    elif suffix in ['.yaml', '.yml']:
+    elif extension in ['.yaml', '.yml']:
         return yaml.safe_load(string)
 
     else:
