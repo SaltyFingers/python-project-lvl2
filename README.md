@@ -7,8 +7,6 @@ This package allows You get difference between two ``json`` or ``yaml/yml`` file
 ### How to install:
 To install this package from GitHub on Your PC use command
 
-.. code::bash
-
     pip install git+https://github.com/SaltyFingers/python-project-lvl2
 
 in your terminal.
@@ -16,13 +14,9 @@ in your terminal.
 ### How to use:
 You can get help by using:
 
-.. code:: bash
-
     gendiff -h
 
 To get difference you can use command:
-
-.. code:: bash
 
     gendiff path/to/file1 path/to/file2
 
