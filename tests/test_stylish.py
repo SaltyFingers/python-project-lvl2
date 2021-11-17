@@ -1,4 +1,4 @@
-from gendiff.formaters.stylish_formater import (
+from gendiff.formaters.stylish import (
     format_value, get_string_from_dictionary)
 
 nested_object = {'deep': {'id': {'number': 45}}, 'fee': 100500}

@@ -1,4 +1,4 @@
-from gendiff.formaters.plain_formater import format_value
+from gendiff.formaters.plain import format_value
 
 FILEPATH_JSON1 = 'tests/fixtures/file1_2.json'
 FILEPATH_JSON2 = 'tests/fixtures/file2_2.json'
