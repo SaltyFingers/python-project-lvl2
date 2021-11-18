@@ -15,8 +15,17 @@ EXPECTATION_JSON = 'tests/fixtures/expectation_json.txt'
 
 
 def test_wrong_file_gendiff():
-    with pytest.raises(Exception):
+    with pytest.raises(TypeError) as err:
         generate_diff(FILEPATH_WRONG, FILEPATH_WRONG)
+
+    assert str(err.value) == 'Wrong extension!'
+
+
+def test_wrong_format_gendiff():
+    with pytest.raises(TypeError) as err:
+        generate_diff(FILEPATH_JSON1_2, FILEPATH_JSON2_2, 'unstylish')
+
+    assert str(err. value) == 'Wrong format!'
 
 
 def test_default_format():

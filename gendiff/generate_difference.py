@@ -1,10 +1,8 @@
-import pathlib
-
 from gendiff.formaters.json import format_json
 from gendiff.formaters.plain import format_plain
 from gendiff.formaters.stylish import format_stylish
 from gendiff.search_difference import search_difference
-from gendiff.parser import get_dict_from_string
+from gendiff.parser import get_dict
 
 
 def generate_diff(file_path1, file_path2, format='stylish'):
@@ -16,29 +14,31 @@ def generate_diff(file_path1, file_path2, format='stylish'):
     format: selector of output format (default: stylish format)
     """
 
-    difference = search_difference(open_file_and_get_dict(file_path1),
-                                   open_file_and_get_dict(file_path2))
+    dict1 = get_dict(get_string(file_path1), file_path1)
+    dict2 = get_dict(get_string(file_path2), file_path2)
+
+    difference = search_difference(dict1, dict2)
 
     if format == 'stylish':
         return format_stylish(difference)
 
-    if format == 'plain':
+    elif format == 'plain':
         return format_plain(difference)
 
-    if format == 'json':
+    elif format == 'json':
         return format_json(difference)
 
+    else:
+        raise TypeError('Wrong format!')
 
-def open_file_and_get_dict(file_path):
+
+def get_string(file_path):
     """
-    Return dictionary from oppened file with it's path
+    Return string representation from file
     arguments:
     file_path: path to file to compare
     """
 
-    file_extension = pathlib.PurePosixPath(file_path).suffix
-
     with open(file_path, 'r') as file_object:
-        dict_from_string = get_dict_from_string(file_object.read(),
-                                                file_extension)
-    return dict_from_string
+        string = file_object.read()
+    return string
