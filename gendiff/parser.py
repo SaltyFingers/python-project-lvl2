@@ -1,10 +1,9 @@
 import json
-import pathlib
 
 import yaml
 
 
-def get_dict(string, file_path):
+def get_dict(string, extension):
     """
     Return dictionary from string representation of both files.
     arguments:
@@ -12,7 +11,6 @@ def get_dict(string, file_path):
     second_string: string representation of second file
     suffix: extension of files
     """
-    extension = pathlib.PurePosixPath(file_path).suffix
 
     if extension == '.json':
         return json.loads(string)

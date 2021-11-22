@@ -1,8 +1,8 @@
-from gendiff.formaters.json import format_json
-from gendiff.formaters.plain import format_plain
-from gendiff.formaters.stylish import format_stylish
-from gendiff.search_difference import search_difference
+import pathlib
+
+from gendiff.formaters.__init__ import select_formater
 from gendiff.parser import get_dict
+from gendiff.search_difference import search_difference
 
 
 def generate_diff(file_path1, file_path2, format='stylish'):
@@ -14,22 +14,14 @@ def generate_diff(file_path1, file_path2, format='stylish'):
     format: selector of output format (default: stylish format)
     """
 
-    dict1 = get_dict(get_string(file_path1), file_path1)
-    dict2 = get_dict(get_string(file_path2), file_path2)
+    dict1 = get_dict(get_string(file_path1),
+                     pathlib.PurePosixPath(file_path1).suffix)
+    dict2 = get_dict(get_string(file_path2),
+                     pathlib.PurePosixPath(file_path1).suffix)
 
     difference = search_difference(dict1, dict2)
 
-    if format == 'stylish':
-        return format_stylish(difference)
-
-    elif format == 'plain':
-        return format_plain(difference)
-
-    elif format == 'json':
-        return format_json(difference)
-
-    else:
-        raise TypeError('Wrong format!')
+    return select_formater(format)(difference)
 
 
 def get_string(file_path):
