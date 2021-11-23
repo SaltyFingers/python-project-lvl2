@@ -5,15 +5,16 @@ from gendiff.formaters.stylish import format_stylish
 formaters = {
     'stylish': format_stylish,
     'plain': format_plain,
-    'json': format_json}
+    'json': format_json, }
 
 
 def select_formater(format):
     """
-    Return selected formater for output format
+    Return function for selected formater to get selected output format
     arguments:
     format: selected format
     """
     if format not in formaters:
         raise TypeError('Wrong format!')
+
     return formaters[format]

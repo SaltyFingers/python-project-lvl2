@@ -1,6 +1,6 @@
 import pathlib
 
-from gendiff.formaters.__init__ import select_formater
+from gendiff.formaters import select_formater
 from gendiff.parser import get_dict
 from gendiff.search_difference import search_difference
 
